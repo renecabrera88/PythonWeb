@@ -1,6 +1,6 @@
 """aqui van los configuraciones globales"""
 class Config:
-    pass
+    SECRET_KEY = 'miclavesecreta'
 
 
 """aqui van las configuraciones

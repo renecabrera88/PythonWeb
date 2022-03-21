@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+<!--Importo la macro desde helper/_form-->
+{% from 'helpers/_forms.html' import render_field %}
+
+{% block container %}
+<div class="col-md-12 col-md-offset-1">
+    <h3>Login</h3>
+    <form class=""  method="post">
+
+        <!--Aqui creo, a pertir de secret_key token para cada uno de los formularios y saber que
+        la peticion al servidor viene de un formulario valido-->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"\>
+
+
+        <!--aqui se renderiza los campos envioado por la instancia de la classe wtforms a views.py-->
+        <div class="form-group">
+            <!--Aqui renderizamos la macro pero damos como parametros los campos en la classe wtforms
+            username y password-->
+            {{ render_field(form.username, class='form-control', placeholder='username') }}
+        </div>
+        <div class="form-group">
+            {{ render_field(form.password, class='form-control', placeholder='password') }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary" name="button">
+            Login
+        </button>
+
+    </form>
+</div>
+    
+{% endblock %}

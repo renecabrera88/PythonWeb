@@ -1,7 +1,9 @@
 """esta es la clase blueprint de flask para trabajar rutas"""
 from flask import Blueprint
 """render template es una funcion que permite renderizar los .htmls"""
-from flask import render_template
+from flask import render_template, request
+
+from .forms import LoginForm
 
 """instancia de blueprint puedo definir las rutas"""
 page = Blueprint('page', __name__)
@@ -19,4 +21,20 @@ def page_not_found(error):
 def index():
     """con render template automaticamente va a buscar el nmbre del html a templates"""
     return render_template('index.html')
- 
+
+"""Esta ruta renderiza template con ingleso de usuario y la data dedebera
+ser validada por el wtforms."""
+@page.route('/login', methods=['GET', 'POST'])
+def login():
+    """instanciamos LoginForm y pasamos los request a la instancia"""
+    form = LoginForm(request.form)
+    """preguntamos si le metodo es POST y valido los datos"""
+    if request.method == 'POST' and form.validate():
+        """Si es post, ya podemos crear la session"""
+        print(form.username.data)
+        print(form.password.data)
+        print('Nueva sesion creada')
+
+    """form lo enviamos como parametro"""
+    return render_template('auth/login.html', title='Login', form=form)
+

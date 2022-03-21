@@ -1,12 +1,15 @@
 from flask import Flask
-
 """gracias a esta libreria se puede integrar bootstrap al proyecto"""
 from flask_bootstrap import Bootstrap
+
+from flask_wtf.csrf import CSRFProtect
+
 app = Flask(__name__)
 
 """instanciamos bootstrap"""
 bootstrap = Bootstrap()
-
+"""crao una intancias"""
+csrf = CSRFProtect()
 """importo page para decirl al 
 servidor cuales son las rutas"""
 from .views import page
@@ -22,6 +25,10 @@ def create_app(config):
     el cual sera tratado como un objeto en la siguiente linea y la implermentacion
     lo hare mediente herencia de template"""
     app.config.from_object(config)
+
+    """asocio mi instancia de csrf con la aplicacion, ose con el servidor. 
+    y en el archivo config creamo nuestra clave secreta """
+    csrf.init_app(app)
 
     """asignamos app a bottstrap"""
     bootstrap.init_app(app)
