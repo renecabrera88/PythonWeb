@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+__pycache__
 
 # Ignora la carpeta node_modules
 node_modules
@@ -8,7 +8,7 @@ node_modules
 *.txt
 
 ## Environments
-venv/
+venv
 
 # Ignora los archivos relacionados a API keys
 .env
